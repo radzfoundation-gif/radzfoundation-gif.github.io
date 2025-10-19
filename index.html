@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Untuk Sayang 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffd6e0, #ffe6f0);
+      font-family: "Poppins", sans-serif;
+      color: #ff6699;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.6em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px rgba(255, 100, 150, 0.3);
+      animation: fadeIn 2s ease forwards;
+    }
+
+    p {
+      animation: fadeIn 2.5s ease forwards;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 30px;
+      background: #ffb6c1;
+      color: white;
+      font-weight: 600;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff8ba0;
+      transform: scale(1.05);
+    }
+
+    .hidden-message {
+      display: none;
+      font-size: 1.2em;
+      text-align: center;
+      margin-top: 25px;
+      line-height: 1.6;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99bb;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      border-radius: 5px;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff99bb;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tombol Musik */
+    #musicControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffb6c1;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 1.5em;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.3);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #musicControl:hover {
+      background: #ff8ba0;
+      transform: scale(1.1);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hai,Yesi Jelek 💕</h1>
+  <p>Klik tombol di bawah ini ya...</p>
+  <button onclick="revealLove()">💖 Lihat Pesan Rahasia 💖</button>
+
+  <div class="hidden-message" id="message">
+    <p>Sayang, terima kasih sudah ada di hidupku 🌸<br>
+    Kamu adalah alasan senyumku setiap hari 💫<br>
+    Aku cinta kamu, selalu dan selamanya 💕</p>
+  </div>
+
+  <audio id="bgMusic" src="everythingyouare.mp3" loop></audio>
+
+  
+  <button id="musicControl" onclick="toggleMusic()">🎵</button>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const msg = document.getElementById("message");
+    const musicBtn = document.getElementById("musicControl");
+    let isPlaying = false;
+
+    function revealLove() {
+      msg.style.display = "block";
+      createHearts();
+      if (!isPlaying) {
+        music.play();
+        isPlaying = true;
+        musicBtn.textContent = "⏸";
+      }
+    }
+
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.textContent = "🎵";
+      } else {
+        music.play();
+        musicBtn.textContent = "⏸";
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 15; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }
+    }
+  </script>
+</body>
+</html>
